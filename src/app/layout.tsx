@@ -1,18 +1,17 @@
 import type { Metadata, Viewport } from "next";
-import { Instrument_Serif, Inter } from "next/font/google";
+import { DM_Sans, Playfair_Display } from "next/font/google";
 import Script from "next/script";
 import { Header } from "@/components/Header";
 import "./globals.css";
 
-const inter = Inter({
+const sans = DM_Sans({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-dm-sans",
 });
 
-const display = Instrument_Serif({
+const display = Playfair_Display({
   subsets: ["latin"],
-  weight: "400",
-  variable: "--font-display-serif",
+  variable: "--font-playfair",
 });
 
 export const metadata: Metadata = {
@@ -45,7 +44,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${display.variable}`}
+      className={`${sans.variable} ${display.variable}`}
       data-scroll-behavior="smooth"
       suppressHydrationWarning
     >
@@ -53,9 +52,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <Script id="theme-init" strategy="beforeInteractive">
           {themeScript}
         </Script>
-        <a className="skip" href="#rates">
-          Skip to rates
-        </a>
         <div className="page">
           <Header />
           <div className="main">{children}</div>
