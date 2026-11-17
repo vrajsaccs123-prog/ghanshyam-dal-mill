@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { DM_Sans, Playfair_Display } from "next/font/google";
-import Script from "next/script";
 import { Header } from "@/components/Header";
 import "./globals.css";
 
@@ -31,27 +30,10 @@ export const viewport: Viewport = {
 
 export const dynamic = "force-dynamic";
 
-const themeScript = `
-try {
-  var theme = localStorage.getItem("theme");
-  if (theme === "light" || theme === "dark") {
-    document.documentElement.setAttribute("data-theme", theme);
-  }
-} catch (e) {}
-`;
-
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html
-      lang="en"
-      className={`${sans.variable} ${display.variable}`}
-      data-scroll-behavior="smooth"
-      suppressHydrationWarning
-    >
+    <html lang="en" className={`${sans.variable} ${display.variable}`} data-scroll-behavior="smooth">
       <body>
-        <Script id="theme-init" strategy="beforeInteractive">
-          {themeScript}
-        </Script>
         <div className="page">
           <Header />
           <div className="main">{children}</div>

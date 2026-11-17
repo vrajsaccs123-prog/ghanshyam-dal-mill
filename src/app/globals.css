@@ -20,10 +20,6 @@
   --radius: 12px;
   --shadow: 0 4px 24px #0000000f;
   --shadow-lift: 0 8px 40px #0000001f;
-  --glass: color-mix(in srgb, var(--paper) 46%, transparent);
-  --glass-strong: color-mix(in srgb, var(--paper) 90%, transparent);
-  --glass-edge: color-mix(in srgb, white 72%, var(--gold) 18%);
-  --glass-shine: inset 0 1px 0 color-mix(in srgb, white 85%, transparent);
   --ease: cubic-bezier(0.22, 0.7, 0.28, 1);
   --font-sans: var(--font-dm-sans), system-ui, sans-serif;
   --font-display: var(--font-playfair), Georgia, serif;
@@ -32,73 +28,13 @@
   --content: 1160px;
 }
 
-:root[data-theme="dark"] {
-  color-scheme: dark;
-  --paper: #1a2416;
-  --shell: #121910;
-  --surface-2: #222e1c;
-  --ink: #faf7f2;
-  --ink-2: #e4ddd0;
-  --ink-3: #c9c2b4;
-  --ink-4: #a39c8e;
-  --line: #314028;
-  --line-2: #283420;
-  --line-strong: #415434;
-  --olive: #d7e4c8;
-  --olive-deep: #8fb37a;
-  --gold: #e0b56a;
-  --gold-bright: #c9943a;
-  --gold-soft: #2a2416;
-  --up: #b7d4a8;
-  --down: #e6907c;
-  --shadow: 0 4px 24px #00000066;
-  --shadow-lift: 0 8px 40px #0000008c;
-  --glass: color-mix(in srgb, var(--paper) 48%, transparent);
-  --glass-strong: color-mix(in srgb, var(--paper) 84%, transparent);
-  --glass-edge: color-mix(in srgb, white 22%, transparent);
-  --glass-shine: inset 0 1px 0 color-mix(in srgb, white 24%, transparent);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    color-scheme: dark;
-    --paper: #1a2416;
-    --shell: #121910;
-    --surface-2: #222e1c;
-    --ink: #faf7f2;
-    --ink-2: #e4ddd0;
-    --ink-3: #c9c2b4;
-    --ink-4: #a39c8e;
-    --line: #314028;
-    --line-2: #283420;
-    --line-strong: #415434;
-    --olive: #d7e4c8;
-    --olive-deep: #8fb37a;
-    --gold: #e0b56a;
-    --gold-bright: #c9943a;
-    --gold-soft: #2a2416;
-    --up: #b7d4a8;
-    --down: #e6907c;
-    --shadow: 0 4px 24px #00000066;
-    --shadow-lift: 0 8px 40px #0000008c;
-    --glass: color-mix(in srgb, var(--paper) 48%, transparent);
-    --glass-strong: color-mix(in srgb, var(--paper) 84%, transparent);
-    --glass-edge: color-mix(in srgb, white 22%, transparent);
-    --glass-shine: inset 0 1px 0 color-mix(in srgb, white 24%, transparent);
-  }
-}
-
 * { box-sizing: border-box; }
 
 html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  background:
-    radial-gradient(ellipse 78% 48% at 18% 28%, color-mix(in srgb, var(--gold-bright) 36%, transparent), transparent 70%),
-    radial-gradient(ellipse 72% 52% at 84% 72%, color-mix(in srgb, var(--olive) 26%, transparent), transparent 72%),
-    var(--shell);
-  background-attachment: fixed;
+  background: var(--shell);
   color: var(--ink);
   font-family: var(--font-sans);
   font-size: 17px;
@@ -134,34 +70,9 @@ button, input { font: inherit; color: inherit; }
 }
 
 .masthead {
-  position: relative;
   background: var(--paper);
   border-top: 3px solid var(--gold-bright);
   border-bottom: 1px solid var(--line);
-}
-
-.theme-toggle {
-  position: absolute;
-  top: max(10px, env(safe-area-inset-top));
-  right: max(12px, env(safe-area-inset-right));
-  z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  padding: 0;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: var(--paper);
-  color: var(--ink-2);
-  cursor: pointer;
-}
-
-.theme-toggle:hover {
-  color: var(--ink);
-  background: var(--gold-soft);
-  border-color: var(--gold-bright);
 }
 
 .masthead-inner {
@@ -239,16 +150,6 @@ button, input { font: inherit; color: inherit; }
 .nav-link:hover::after,
 .nav-link.is-on::after { transform: scaleX(1); }
 .nav-link.is-on { color: var(--olive); }
-
-.theme-sun { display: none; }
-
-:root[data-theme="dark"] .theme-sun { display: inline; }
-:root[data-theme="dark"] .theme-moon { display: none; }
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .theme-sun { display: inline; }
-  :root:not([data-theme="light"]) .theme-moon { display: none; }
-}
 
 .stickybar {
   position: fixed;
@@ -381,18 +282,15 @@ button, input { font: inherit; color: inherit; }
   align-self: start;
   min-width: 0;
   scroll-margin-top: 64px;
-  background-color: var(--glass);
-  background-image: linear-gradient(180deg, color-mix(in srgb, white 55%, transparent), transparent 52%);
-  border: 1px solid var(--glass-edge);
+  background: var(--paper);
+  border: 1px solid var(--line);
   border-radius: var(--radius);
-  box-shadow: var(--shadow), var(--glass-shine);
-  backdrop-filter: blur(18px) saturate(1.5);
+  box-shadow: var(--shadow);
 }
 
 .card:hover {
-  background-color: var(--glass-strong);
-  border-color: color-mix(in srgb, var(--gold-bright) 55%, white);
-  box-shadow: var(--shadow-lift), var(--glass-shine);
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-lift);
 }
 
 .card-title {
@@ -464,11 +362,9 @@ button, input { font: inherit; color: inherit; }
   width: min(680px, 100%);
   max-height: 100%;
   overflow: hidden;
-  background-color: var(--glass-strong);
-  background-image: linear-gradient(180deg, color-mix(in srgb, white 28%, transparent), transparent 18%);
-  border-color: var(--glass-edge);
-  box-shadow: var(--shadow-lift), var(--glass-shine);
-  backdrop-filter: blur(24px) saturate(1.6);
+  background: var(--paper);
+  border-color: var(--line);
+  box-shadow: var(--shadow-lift);
   transition:
     top 440ms var(--ease),
     left 440ms var(--ease),
